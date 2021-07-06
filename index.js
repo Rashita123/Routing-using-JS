@@ -39,8 +39,9 @@ const Link = (destinationPath) => {
 }
 
 const PrivateRoute = (authenticated, toPath, redirectPath) => {
-    if(authenticated)
-            Root.innerHTML = toPath;
+    if(authenticated){
+            Root.innerHTML = toPath();
+    }
     else
         {
             Link(redirectPath);
@@ -55,7 +56,7 @@ const checkRender = () => {
     if(currentPath === '/'){
         Root.innerHTML = names.map(name => Home(name)).join(" ");
     }else if(currentPath === '/blogs'){
-        PrivateRoute(authenticated, Blog(), '/login')
+        PrivateRoute(authenticated, Blogs, '/login')
     }else if(currentPath === '/about-us'){
         Root.innerHTML = AboutUs();
     }else if(currentPath === '/login'){
