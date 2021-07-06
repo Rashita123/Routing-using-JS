@@ -7,7 +7,7 @@ const loginButton = document.querySelector("#login-button");
 
 let authenticated = false;
 
-//Pages
+
 const Home = (name) => {
     return `<div class="home-page"><h3>Hi! ${name}. This is Home Page</h3></div>`
 }
@@ -35,7 +35,6 @@ const Page404 = () => {
 
 
 
-//Component
 const Link = (destinationPath, redirect) => {
     const currentPath = window.location.pathname;
     
@@ -126,30 +125,3 @@ window.addEventListener('load', () => {
 window.addEventListener('popstate', () => {
     checkRender();
 })
-
-
-
-
-
-
-
-
-
-
-
-// const blogsButton = document.querySelector("#blogs-button");
-// const state = {id:100};
-
-// const checkRender = () => {
-//     const currentPath = window.location.pathname;
-//     if(currentPath === "/blogs"){
-//         Root.innerHTML = `<h1>This is the blogs Page!</h1>
-//         <p>If you wanna see all the blogs written by me, Hang ON!</p>`;
-//     }
-// }
-
-// blogsButton.addEventListener("click", () => {
-//     const currentPath = window.location.pathname;
-//     window.history.replaceState(state, currentPath, "/blogs");
-//     checkRender();
-// })
