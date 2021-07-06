@@ -4,8 +4,6 @@ const homeButton = document.querySelector("#home-button");
 const aboutUsButton = document.querySelector("#about-us-button");
 
 
-const state = {id:100};
-
 
 //Pages
 const Home = (name) => {
