@@ -38,6 +38,16 @@ const Link = (destinationPath) => {
     window.history.pushState(state, currentPath, destinationPath)
 }
 
+const PrivateRoute = (authenticated, toPath, redirectPath) => {
+    if(authenticated)
+            Root.innerHTML = toPath();
+    else
+        {
+            Link(redirectPath);
+            checkRender();
+        }
+}
+
 const names = ['Shubham', 'Rabia', "Rashita"];
 const checkRender = () => {
     const currentPath = window.location.pathname;
@@ -45,13 +55,7 @@ const checkRender = () => {
     if(currentPath === '/'){
         Root.innerHTML = names.map(name => Home(name)).join(" ");
     }else if(currentPath === '/blogs'){
-        if(authenticated)
-            Root.innerHTML = Blogs();
-        else
-            {
-                Link('/login');
-                checkRender();
-            }
+        PrivateRoute(authenticated, Blog, '/login')
     }else if(currentPath === '/about-us'){
         Root.innerHTML = AboutUs();
     }else if(currentPath === '/login'){
