@@ -18,6 +18,10 @@ const Blogs = () => {
     return `<h1>This is Blogs Page</h1>`
 }
 
+const Page404 = () => {
+    return `<h1>Oops! Try Other Links!.</h1>`
+}
+
 
 //Component
 const Link = (destinationPath) => {
@@ -36,6 +40,8 @@ const checkRender = () => {
         Root.innerHTML = Blogs();
     }else if(currentPath === '/about-us'){
         Root.innerHTML = AboutUs();
+    }else{
+        Root.innerHTML = Page404();
     }
 }
 
