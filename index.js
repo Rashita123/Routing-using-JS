@@ -2,8 +2,10 @@ const Root = document.querySelector(".root");
 const blogsButton = document.querySelector("#blogs-button");
 const homeButton = document.querySelector("#home-button");
 const aboutUsButton = document.querySelector("#about-us-button");
+const LoginButton = document.querySelector("#login-button");
 
 
+const authenticated = false;
 
 //Pages
 const Home = (name) => {
@@ -18,9 +20,15 @@ const Blogs = () => {
     return `<h1>This is Blogs Page</h1>`
 }
 
+const Login = () => {
+    return `<h3>Login Kro pehle!</h3>`
+}
+
 const Page404 = () => {
     return `<h1>Oops! Try Other Links!.</h1>`
 }
+
+
 
 
 //Component
@@ -37,10 +45,19 @@ const checkRender = () => {
     if(currentPath === '/'){
         Root.innerHTML = names.map(name => Home(name)).join(" ");
     }else if(currentPath === '/blogs'){
-        Root.innerHTML = Blogs();
+        if(authenticated)
+            Root.innerHTML = Blogs();
+        else
+            {
+                Link('/login');
+                checkRender();
+            }
     }else if(currentPath === '/about-us'){
         Root.innerHTML = AboutUs();
-    }else{
+    }else if(currentPath === '/login'){
+        Root.innerHTML = Login();
+    }
+    else{
         Root.innerHTML = Page404();
     }
 }
@@ -62,6 +79,13 @@ blogsButton.addEventListener("click", () => {
     Link('/blogs');
     checkRender();
 })
+
+
+LoginButton.addEventListener("click", () => {
+    Link('/login');
+    checkRender();
+}) 
+
 window.addEventListener('load', () => {
     state= {id:100};
     const currentPath = window.location.pathname;
