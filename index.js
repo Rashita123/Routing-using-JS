@@ -32,7 +32,7 @@ const names = ['Shubham', 'Rabia', "Rashita"];
 const checkRender = () => {
     const currentPath = window.location.pathname;
 
-    if(currentPath === '/index.html'){
+    if(currentPath === '/'){
         Root.innerHTML = names.map(name => Home(name)).join(" ");
     }else if(currentPath === '/blogs'){
         Root.innerHTML = Blogs();
@@ -43,7 +43,7 @@ const checkRender = () => {
 
 
 homeButton.addEventListener("click", () => {
-    Link('/index.html');
+    Link('/');
     checkRender();
 })
 
