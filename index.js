@@ -2,8 +2,8 @@ const Root = document.querySelector(".root");
 const blogsButton = document.querySelector("#blogs-button");
 const homeButton = document.querySelector("#home-button");
 const aboutUsButton = document.querySelector("#about-us-button");
-const LoginButton = document.querySelector("#login-button");
-
+const loginButton = document.querySelector("#login-button");
+    
 
 let authenticated = false;
 
@@ -21,8 +21,11 @@ const Blogs = () => {
 }
 
 const Login = () => {
+    if(authenticated){
+        return `<h3>You are successfully Logged In!</h3>`
+    }else
     return `<h3>Login Kro pehle!</h3>
-    <button id="login-button">Login</button>`
+    <p>Click on Login button to access this content</p>`
 }
 
 const Page404 = () => {
@@ -35,6 +38,10 @@ const Page404 = () => {
 //Component
 const Link = (destinationPath, redirect) => {
     const currentPath = window.location.pathname;
+    
+    if(currentPath===destinationPath)return;
+    console.log({currentPath});
+    console.log({destinationPath});
     const state = {id: 100};
     if(redirect){
         window.history.replaceState(state, currentPath, destinationPath)
@@ -48,12 +55,13 @@ const PrivateRoute = (authenticated, toPath, redirectPath) => {
     }
     else
         {
+            
             Link(redirectPath, true);
             checkRender();
         }
 }
 
-const names = ['Shubham', 'Rabia', "Rashita"];
+const names = ['User1', 'User2', "User3"];
 const checkRender = () => {
     const currentPath = window.location.pathname;
 
@@ -90,16 +98,20 @@ blogsButton.addEventListener("click", () => {
 })
 
 
-LoginButton.addEventListener("click", () => {
-    Link('/login', false);
-    checkRender();
-    const loginButton = Root.querySelector("#login-button");
-    loginButton.addEventListener("click", () => {
-        authenticated = !authenticated;
-        checkRender();
-    })
+loginButton.addEventListener("click", () => {
+    authenticated = !authenticated;
+    if(loginButton.innerHTML === "Login"){
+        loginButton.innerHTML = "Logout";
+    } else {
+        loginButton.innerHTML = "Login";
+    }
     
+    checkRender();
 }) 
+
+
+
+
 
 window.addEventListener('load', () => {
     state= {id:100};
@@ -107,15 +119,13 @@ window.addEventListener('load', () => {
     if (currentPath === '/index.html'){
         window.history.replaceState(state, '/index.html', '/')
     }
+    
     checkRender();
 })
 
 window.addEventListener('popstate', () => {
     checkRender();
 })
-
-
-
 
 
 
