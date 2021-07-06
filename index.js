@@ -59,6 +59,9 @@ blogsButton.addEventListener("click", () => {
     checkRender();
 })
 window.addEventListener('load', () => {
+    state= {id:100};
+    const currentPath = window.location.pathname;
+    window.history.pushState(state, currentPath, '/');
     checkRender();
 })
 
