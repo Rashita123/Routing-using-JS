@@ -5,7 +5,7 @@ const aboutUsButton = document.querySelector("#about-us-button");
 const LoginButton = document.querySelector("#login-button");
 
 
-const authenticated = false;
+let authenticated = false;
 
 //Pages
 const Home = (name) => {
@@ -21,7 +21,8 @@ const Blogs = () => {
 }
 
 const Login = () => {
-    return `<h3>Login Kro pehle!</h3>`
+    return `<h3>Login Kro pehle!</h3>
+    <button id="login-button">Login</button>`
 }
 
 const Page404 = () => {
@@ -32,9 +33,12 @@ const Page404 = () => {
 
 
 //Component
-const Link = (destinationPath) => {
+const Link = (destinationPath, redirect) => {
     const currentPath = window.location.pathname;
     const state = {id: 100};
+    if(redirect){
+        window.history.replaceState(state, currentPath, destinationPath)
+    }else
     window.history.pushState(state, currentPath, destinationPath)
 }
 
@@ -44,7 +48,7 @@ const PrivateRoute = (authenticated, toPath, redirectPath) => {
     }
     else
         {
-            Link(redirectPath);
+            Link(redirectPath, true);
             checkRender();
         }
 }
@@ -69,26 +73,32 @@ const checkRender = () => {
 
 
 homeButton.addEventListener("click", () => {
-    Link('/');
+    Link('/', false);
     checkRender();
 })
 
 
 aboutUsButton.addEventListener("click", () => {
-    Link('/about-us');
+    Link('/about-us', false);
     checkRender();
 })
 
 
 blogsButton.addEventListener("click", () => {
-    Link('/blogs');
+    Link('/blogs', false);
     checkRender();
 })
 
 
 LoginButton.addEventListener("click", () => {
-    Link('/login');
+    Link('/login', false);
     checkRender();
+    const loginButton = Root.querySelector("#login-button");
+    loginButton.addEventListener("click", () => {
+        authenticated = !authenticated;
+        checkRender();
+    })
+    
 }) 
 
 window.addEventListener('load', () => {
